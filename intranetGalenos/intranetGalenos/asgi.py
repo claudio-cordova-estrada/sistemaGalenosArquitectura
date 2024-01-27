@@ -1,5 +1,5 @@
 """
-ASGI config for sistemaGalenos project.
+ASGI config for intranetGalenos project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sistemaGalenos.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'intranetGalenos.settings')
 
 application = get_asgi_application()
