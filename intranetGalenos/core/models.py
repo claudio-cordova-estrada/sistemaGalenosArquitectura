@@ -54,7 +54,7 @@ class Atencion(models.Model):
     rut_medico = models.ForeignKey(Medico, on_delete=CASCADE)
     fecha = models.DateField()
     hora_inicio = models.CharField(max_length=5)
-    hora_inicio = models.CharField(max_length=5)
+    hora_fin = models.CharField(max_length=5)
     estado = models.CharField(max_length=20)
 
     def __str__(self):
