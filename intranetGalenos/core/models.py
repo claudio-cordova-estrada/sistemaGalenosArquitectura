@@ -9,7 +9,6 @@ class Usuario(models.Model):
     password = models.CharField(max_length=20)
     apellido_paterno = models.CharField(max_length=200)
     apellido_materno = models.CharField(max_length=200)
-    email = models.CharField(max_length=90)
     telefono = models.IntegerField()
 
     def __str__(self):

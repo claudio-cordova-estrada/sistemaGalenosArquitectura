@@ -1,22 +1,61 @@
 function registrarUsuario() {
     // Obtener los valores del formulario
-    var nombre = document.getElementById("nombre").value;
-    var email = document.getElementById("email").value;
+    var username = document.getElementById("nombre").value;
     var password = document.getElementById("password").value;
+    var email = document.getElementById("email").value;
+    var apellido_paterno = document.getElementById("apellido_paterno").value;
+    var apellido_materno = document.getElementById("apellido_materno").value;
+    var telefono = document.getElementById("telefono").value;
+
 
     // Validar los campos (puedes agregar más validaciones según tus necesidades)
-    if (nombre === "" || email === "" || password === "") {
+    if (username === "" || password === "" || email === "" || 
+    apellido_paterno === "" || apellido_materno === "" || telefono === "") {
         alert("Por favor, completa todos los campos.");
         return;
     }
 
-    // Procesar la información (puedes enviarla a un servidor, almacenarla en localStorage, etc.)
-    // En este ejemplo, simplemente mostramos un mensaje de éxito en la consola.
-    console.log("Usuario registrado con éxito:");
-    console.log("Nombre: " + nombre);
-    console.log("Correo Electrónico: " + email);
-    // ¡No debes almacenar contraseñas en texto plano! En un entorno real, deberías usar algún método de cifrado.
+    // Enviar los datos al servidor (puedes usar AJAX, Fetch, etc.)
+    fetch('logReg', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'), // Agrega el token CSRF para protección
+        },
+        body: JSON.stringify({
+            nombre: username,
+            email: email,
+            password: password,
+            apellido_paterno: apellido_paterno,
+            apellido_materno: apellido_materno,
+            telefono: telefono,
+            rut_paciente: rut_paciente,
+            direccion: direccion,
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Manejar la respuesta del servidor (redireccionar, mostrar mensajes, etc.)
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
-    // Puedes redirigir al usuario a otra página después del registro si lo deseas.
-    // window.location.href = "pagina-exito.html";
+// Función para obtener el token CSRF de las cookies
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Buscar la cookie con el nombre especificado
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
