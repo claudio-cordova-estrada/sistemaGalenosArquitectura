@@ -9,7 +9,6 @@ class Usuario(models.Model):
     password = models.CharField(max_length=20)
     apellido_paterno = models.CharField(max_length=200)
     apellido_materno = models.CharField(max_length=200)
-    email = models.CharField(max_length=90)
     telefono = models.IntegerField()
 
     def __str__(self):
@@ -55,7 +54,7 @@ class Atencion(models.Model):
     rut_medico = models.ForeignKey(Medico, on_delete=CASCADE)
     fecha = models.DateField()
     hora_inicio = models.CharField(max_length=5)
-    hora_inicio = models.CharField(max_length=5)
+    hora_fin = models.CharField(max_length=5)
     estado = models.CharField(max_length=20)
 
     def __str__(self):
