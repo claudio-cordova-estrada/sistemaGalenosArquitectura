@@ -31,15 +31,41 @@ def testimonial(request):
 def logReg(request):
     data = {
         'form': PacienteForm(),
+        'log': LoginPaciente(),
         }
 
     if request.method == 'POST':
-        form = PacienteForm(request.POST)
-        if form.is_valid():
-            form.save()
-            data['mensaje'] = 'Los datos fueron añadidos correctamente'
+        if "register" in request.method == "POST":
+            form = PacienteForm(request.POST)
+            if form.is_valid():
+                form.save()
+                data['mensaje'] = 'Los datos fueron añadidos correctamente'
+        if "login" in request.method == "POST":
+            email = request.GET.get('email', '')
+            password = request.GET.get('password', '')
+            
+            try:
+                usuario = Usuario.object.get(email=email, password=password)
+                data['mensaje'] = 'Login exitoso'
+            except Usuario.DoesNotExist:
+                data['mensaje'] = 'Usuario no encontrado'
     else:
         form = PacienteForm()
         data['mensaje'] = 'Los datos no pudieron ser añadidos'
 
     return render(request, 'registration/logReg.html', data)
+
+def verificacion(request):
+    data = {}
+    loginCon = False
+    
+    email = request.GET.get('email', '')
+    password = request.GET.get('password', '')
+    
+    try:
+        usuario = Usuario.object.get(email=email, password=password)
+        loginCon = True
+        return loginCon
+    except Usuario.DoesNotExist:
+        data['mensaje'] = 'Usuario no encontrado'
+        return loginCon

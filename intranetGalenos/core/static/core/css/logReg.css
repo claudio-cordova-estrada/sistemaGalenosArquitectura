@@ -116,6 +116,6 @@ body {
 
 /* cambios personales */
 
-#container form li {
-    margin-bottom: 100px;
+.form-control {
+    max-width: 20%;
 }

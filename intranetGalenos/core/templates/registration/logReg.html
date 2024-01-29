@@ -18,21 +18,24 @@
 
 <body>
     <div class="container" id="container">
+
+        <h1>Registrarse</h1>
+        
         <form method="post" action="{% url 'logReg' %}">
             {% csrf_token %}
             {{ form.as_ul }}
-            <button type="submit">Guardar</button>
+            <br>
+            <button type="submit" name="register">Guardar</button>
         </form>
 
         <br>
 
         <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Iniciar sesión</h1>
-                <input type="email" placeholder="Correo electrónico" />
-                <input type="password" placeholder="Contraseña" />
+            <form action="{% url 'logReg' %}">
+                {% csrf_token %}
+                {{ log.as_ul }}
                 <a href="#">¿Olvidaste tu contraseña?</a>
-                <button>Iniciar sesión</button>
+                <button type="submit" name="login">Iniciar sesión</button>
             </form>
         </div>
 
