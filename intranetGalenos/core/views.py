@@ -61,3 +61,6 @@ def verificacion(request):
     except Usuario.DoesNotExist:
         data['mensaje'] = 'Usuario no encontrado'
         return loginCon
+    
+def login(request):
+    return render(request, 'registration/login.html')
