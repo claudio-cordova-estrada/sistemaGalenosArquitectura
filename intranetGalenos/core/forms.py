@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.contrib.auth.forms import AuthenticationForm
 from .models import *
 
 class PacienteForm(ModelForm):
@@ -13,7 +14,7 @@ class PacienteForm(ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
 
-class LoginPaciente(ModelForm):
+class LoginPaciente(AuthenticationForm):
     class Meta:
         model = Paciente
         fields = ['email', 'password']
