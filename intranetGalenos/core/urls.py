@@ -5,6 +5,7 @@ from django.contrib import admin
 urlpatterns = [
     path('', home, name="home"),
     path('about', about, name="about"),
+    path('cuentas/', include("django.contrib.auth.urls")),
     path('appointment', appointment, name="appointment"),
     path('contact', contact, name="contact"),
     path('logReg', logReg, name="logReg"),
