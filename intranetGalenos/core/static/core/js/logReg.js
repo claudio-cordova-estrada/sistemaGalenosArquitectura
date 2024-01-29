@@ -29,10 +29,20 @@ function registrarUsuario() {
             apellido_paterno: apellido_paterno,
             apellido_materno: apellido_materno,
             telefono: telefono,
-            rut_paciente: rut_paciente,
+        }),
+    })
+    fetch('logReg', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'), // Agrega el token CSRF para protección
+        },
+        body: JSON.stringify({
+            rutCliente: rutCliente,
             direccion: direccion,
         }),
     })
+
     .then(response => response.json())
     .then(data => {
         // Manejar la respuesta del servidor (redireccionar, mostrar mensajes, etc.)
