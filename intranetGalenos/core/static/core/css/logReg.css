@@ -113,3 +113,9 @@ body {
     background-color: transparent;
     border-color: #fff;
 }
+
+/* cambios personales */
+
+#container form li {
+    margin-bottom: 100px;
+}

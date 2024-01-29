@@ -29,15 +29,6 @@ function registrarUsuario() {
             apellido_paterno: apellido_paterno,
             apellido_materno: apellido_materno,
             telefono: telefono,
-        }),
-    })
-    fetch('logReg', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'), // Agrega el token CSRF para protección
-        },
-        body: JSON.stringify({
             rutCliente: rutCliente,
             direccion: direccion,
         }),

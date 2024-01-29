@@ -3,11 +3,6 @@ from .models import *
 
 # Register your models here.
 
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'email', 'password', 'apellido_paterno', 'apellido_materno', 'telefono']
-    search_fields = ['email', 'telefono']
-    list_per_page = 15
-
 class PacienteAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'email', 'password', 'apellido_paterno', 'apellido_materno', 'telefono', 'rut_paciente', 'dv_paciente', 'direccion']
     search_fields = ['email', 'telefono', 'rut_paciente']
@@ -19,7 +14,7 @@ class MedicoAdmin(admin.ModelAdmin):
     list_per_page = 15
 
 class HorarioAdmin(admin.ModelAdmin):
-    list_display = ['rut_medico', 'jornada', 'dias_semana' 'finalizacion_contrato']
+    list_display = ['rut_medico', 'jornada', 'dias_semana', 'finalizacion_contrato']
     search_fields = ['rut_medico', 'finalizacion_contrato']
     list_per_page = 15
 
@@ -38,7 +33,6 @@ class BoletaAdmin(admin.ModelAdmin):
     list_filter = ['atencion_id']
     list_per_page = 15
 
-admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Paciente, PacienteAdmin)
 admin.site.register(Medico, MedicoAdmin)
 admin.site.register(Horario, HorarioAdmin)
