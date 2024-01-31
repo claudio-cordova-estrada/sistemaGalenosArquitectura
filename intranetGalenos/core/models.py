@@ -24,11 +24,17 @@ class Paciente(Usuario):
 
     def __str__(self):
         return str(self.rut_paciente)
+    
+class Especialidad(models.Model):
+    nombre_esp = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nombre_esp
 
 class Medico(Usuario):
     rut_medico = models.IntegerField()
     dv_medico = models.CharField(max_length=1)
-    especialidad = models.CharField(max_length=200)
+    especialidad = models.ForeignKey(Especialidad, on_delete=CASCADE)
 
     def __str__(self):
         return str(self.rut_medico)
@@ -41,6 +47,8 @@ class Horario(models.Model):
     
     def __str__(self):
         return str(self.rut_medico)
+    
+
 
 class Secretaria(Usuario):
     rut_secretaria = models.IntegerField()

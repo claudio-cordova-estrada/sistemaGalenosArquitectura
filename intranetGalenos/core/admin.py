@@ -13,6 +13,11 @@ class MedicoAdmin(admin.ModelAdmin):
     search_fields = ['email', 'telefono', 'rut_medico', 'especialidad']
     list_per_page = 15
 
+class EspecialidadAdmin(admin.ModelAdmin):
+    list_display = ['id', 'nombre_esp']
+    list_per_page = 15
+
+
 class HorarioAdmin(admin.ModelAdmin):
     list_display = ['rut_medico', 'jornada', 'dias_semana', 'finalizacion_contrato']
     search_fields = ['rut_medico', 'finalizacion_contrato']
@@ -35,6 +40,7 @@ class BoletaAdmin(admin.ModelAdmin):
 
 admin.site.register(Paciente, PacienteAdmin)
 admin.site.register(Medico, MedicoAdmin)
+admin.site.register(Especialidad, EspecialidadAdmin)
 admin.site.register(Horario, HorarioAdmin)
 admin.site.register(Secretaria, SecretariaAdmin)
 admin.site.register(Atencion, AtencionAdmin)
