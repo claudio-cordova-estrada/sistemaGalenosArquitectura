@@ -67,7 +67,7 @@ def registro(request):
         rut_paciente = request.POST['rut_paciente']
         dv_paciente = request.POST['dv_paciente']
         direccion = request.POST['direccion']
-        password = request.POST['password']
+        password = make_password(request.POST['password'])
         paciente = Paciente(nombre=nombre, email=email, password=password, apellido_paterno=apellido_paterno, apellido_materno=apellido_materno, telefono=telefono,
                             rut_paciente=rut_paciente, dv_paciente=dv_paciente, direccion=direccion)
         paciente.save()
@@ -76,22 +76,20 @@ def registro(request):
 
 def login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            try:
-                paciente = Paciente.objects.get(email=email)
-                if check_password(password, paciente.password):
-                    messages.success(request, 'Inicio de sesión exitoso.')
-                    return redirect('core/appointment.html')
-                else:
-                    messages.error(request, 'Contraseña incorrecta.')
-            except Paciente.DoesNotExist:
-                messages.error(request, 'No se encontró un usuario con este correo electrónico.')
-    else:
-        form = LoginForm()
-    return render(request, 'core/login.html', {'form': form})
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        try:
+            paciente = Paciente.objects.get(email=email)
+            if check_password(password, paciente.password):
+                messages.success(request, 'Inicio de sesión exitoso.')
+                return redirect('appointment')
+            else:
+                messages.error(request, 'Contraseña incorrecta.')
+        except Paciente.DoesNotExist:
+            messages.error(request, 'No se encontró un usuario con este correo electrónico.')
+
+    return render(request, 'core/login.html')
 
 def cerrar_sesion(request):
     logout(request)
