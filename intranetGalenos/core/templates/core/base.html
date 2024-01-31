@@ -95,26 +95,23 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                <a href="{% url 'service' %}" class="nav-item nav-link">Service</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">
                         <a href="{% url 'price' %}" class="dropdown-item">Pricing Plan</a>
                         <a href="{% url 'team' %}" class="dropdown-item">Our Dentist</a>
-                        <a href="{% url 'about' %}" class="dropdown-item">About</a>
-                        <a href="{% url 'service' %}" class="dropdown-item">Service</a>
-                        <a href="{% url 'contact' %}" class="dropdown-item">Contact</a>
                         <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
                         <a href="{% url 'appointment' %}" class="dropdown-item">Appointment</a>
                     </div>
                 </div>
-                <div class="loginNavbar navbar-nav ms-auto py-0" id="noLog">
-                    <a href="{% url 'logReg' %}" class="nav-item nav-link">Registro</a>
-                    <a href="cuentas/login/" class="nav-item nav-link">Login</a>
-                </div> <div class="loginNavbar navbar-nav ms-auto py-0 d-none" id="logged">
-                    <a href="#" class="nav-item nav-link">Bienvenido, Daniel</a>
-                    <a href="cuentas/login/" class="nav-item nav-link">Logout</a>
-                </div>
+                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                <a href="{% url 'registro' %}" class="nav-item nav-link">Registro</a>
+                <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
             </div>
+            <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
+                    class="fa fa-search"></i></button>
             <a href="{% url 'appointment' %}" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
         </div>
     </nav>
@@ -137,6 +134,7 @@
         </div>
     </div>
     <!-- Full Screen Search End -->
+
 
     <!-- Hero Start -->
     <div class="container-fluid bg-primary py-5 hero-header mb-5">

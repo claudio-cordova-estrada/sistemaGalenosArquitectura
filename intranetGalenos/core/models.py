@@ -5,7 +5,7 @@ from django.db.models.deletion import CASCADE
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=200)
-    email = models.CharField(max_length=90)
+    email = models.CharField(max_length=90, unique=True)
     password = models.CharField(max_length=20)
     apellido_paterno = models.CharField(max_length=200)
     apellido_materno = models.CharField(max_length=200)
@@ -18,7 +18,7 @@ class Usuario(models.Model):
         abstract = True
     
 class Paciente(Usuario):
-    rut_paciente = models.IntegerField()
+    rut_paciente = models.IntegerField(unique=True)
     dv_paciente = models.CharField(max_length=1)
     direccion = models.CharField(max_length=200)
 
@@ -32,7 +32,7 @@ class Especialidad(models.Model):
         return self.nombre_esp
 
 class Medico(Usuario):
-    rut_medico = models.IntegerField()
+    rut_medico = models.IntegerField(unique=True)
     dv_medico = models.CharField(max_length=1)
     especialidad = models.ForeignKey(Especialidad, on_delete=CASCADE)
 
@@ -51,7 +51,7 @@ class Horario(models.Model):
 
 
 class Secretaria(Usuario):
-    rut_secretaria = models.IntegerField()
+    rut_secretaria = models.IntegerField(unique=True)
     dv_secretaria = models.CharField(max_length=1)
 
     def __str__(self):

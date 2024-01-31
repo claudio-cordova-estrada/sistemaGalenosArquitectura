@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import *
 from .forms import *
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -31,32 +33,14 @@ def testimonial(request):
     return render(request, 'core/testimonial.html')
 
 def logReg(request):
-    data = {
-        'form': PacienteForm(),
-        'log': LoginPaciente(),
-        }
-
-    if request.method == 'POST':
-        form = PacienteForm(request.POST)
-        if form.is_valid():
-            form.save()
-            data['mensaje'] = 'Los datos fueron añadidos correctamente'
-
-    return render(request, 'registration/logReg.html', data)
+    return render(request, 'registration/logReg.html')
 
     
 def login(request):   
-    data = {}
-    
-    userN = request.GET.get('username', None)
-    pssw = request.GET.get('password', None)
-
-    user = authenticate(username = userN, password = pssw)
-    if user is not None:
-        login(request, user)
-    else:
-        data['mensaje'] = 'Error al iniciar sesión'
-        return render(request, 'registration/login.html', data)
+    data = {
+        'form': 'holaxd',
+    }
+    return render(request, 'core/login.html', data)
 
 
 
@@ -68,3 +52,47 @@ def appointment(request):
     else:
         medicos = Medico.objects.all()
     return render(request, 'core/appointment.html', {'especialidades': especialidades, 'medicos': medicos})
+
+
+
+
+def registro(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        email = request.POST['email']
+        
+        apellido_paterno = request.POST['apellido_paterno']
+        apellido_materno = request.POST['apellido_materno']
+        telefono = request.POST['telefono']
+        rut_paciente = request.POST['rut_paciente']
+        dv_paciente = request.POST['dv_paciente']
+        direccion = request.POST['direccion']
+        password = request.POST['password']
+        paciente = Paciente(nombre=nombre, email=email, password=password, apellido_paterno=apellido_paterno, apellido_materno=apellido_materno, telefono=telefono,
+                            rut_paciente=rut_paciente, dv_paciente=dv_paciente, direccion=direccion)
+        paciente.save()
+        messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
+    return render(request, 'core/registro.html')
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            try:
+                paciente = Paciente.objects.get(email=email)
+                if check_password(password, paciente.password):
+                    messages.success(request, 'Inicio de sesión exitoso.')
+                    return redirect('core/appointment.html')
+                else:
+                    messages.error(request, 'Contraseña incorrecta.')
+            except Paciente.DoesNotExist:
+                messages.error(request, 'No se encontró un usuario con este correo electrónico.')
+    else:
+        form = LoginForm()
+    return render(request, 'core/login.html', {'form': form})
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('core/login.html')

@@ -5,14 +5,15 @@ from django.contrib import admin
 urlpatterns = [
     path('', home, name="home"),
     path('about', about, name="about"),
-    path('cuentas/', include("django.contrib.auth.urls")),
     path('appointment', appointment, name="appointment"),
     path('contact', contact, name="contact"),
-    path('logReg', logReg, name="logReg"),
     path('price', price, name="price"),
     path('service', service, name="service"),
     path('team', team, name="team"),
     path('testimonial', testimonial, name="testimonial"),
+    path('registro', registro, name='registro'),
+    path('login', login, name='login'),
+    path('logout', logout, name='logout'),
 ]
 
 admin.site.site_header = "Administrador"
