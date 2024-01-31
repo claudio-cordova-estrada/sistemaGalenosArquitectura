@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
+
+{% block contenido %}
+
+<body>
+    <div class="container" id="container">
+
+        <h1>AAAAAAAAAAA!!</h1>
+
+        <br>
+
+        <div class="form-container sign-in-container">
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          
+          <form method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Iniciar Sesión">
+          </form>
+    </div>
+</body>
+
+{% endblock %}

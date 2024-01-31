@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
+
+{% block contenido %}
+
+<body>
+    <div class="container" id="container">
+
+        <h1>Registrarseeeee!!</h1>
+
+        <br>
+
+        <div class="form-container sign-in-container">
+            <form method="post">
+                {% csrf_token %}
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" required><br>
+                <label for="email">Email:</label>
+                <input type="text" name="email" required><br>
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" required><br>
+                <label for="apellido_paterno">Apellido Paterno:</label>
+                <input type="text" name="apellido_paterno" required><br>
+                <label for="apellido_materno">Apellido materno:</label>
+                <input type="text" name="apellido_materno" required><br>
+                <label for="telefono">Telefono:</label>
+                <input type="text" name="telefono" required><br>
+                <label for="rut_paciente">Rut:</label>
+                <input type="text" name="rut_paciente" required><br>
+                <label for="dv_paciente">dv:</label>
+                <input type="text" name="dv_paciente" required><br>
+                <label for="direccion">Direccion:</label>
+                <input type="text" name="direccion" required><br>
+
+                <input type="submit" value="Registrarse">
+
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+
+
+            </form>
+        </div>
+    </div>
+</body>
+
+{% endblock %}
