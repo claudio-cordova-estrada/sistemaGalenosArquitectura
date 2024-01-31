@@ -95,27 +95,25 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
-                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'service' %}" class="nav-item nav-link">Service</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">
                         <a href="{% url 'price' %}" class="dropdown-item">Pricing Plan</a>
                         <a href="{% url 'team' %}" class="dropdown-item">Our Dentist</a>
+                        <a href="{% url 'about' %}" class="dropdown-item">About</a>
+                        <a href="{% url 'service' %}" class="dropdown-item">Service</a>
+                        <a href="{% url 'contact' %}" class="dropdown-item">Contact</a>
+                        <a href="{% url 'registro' %}" class="dropdown-item">Registro</a>
                         <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
                         <a href="{% url 'appointment' %}" class="dropdown-item">Appointment</a>
                     </div>
                 </div>
-                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                <a href="{% url 'registro' %}" class="nav-item nav-link">Registro</a>
-                <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
                 <div class="loginNavbar navbar-nav ms-auto py-0" id="noLog">
-                    <a href="{% url 'logReg' %}" class="nav-item nav-link">Registro</a>
-                    <a href="cuentas/login/" class="nav-item nav-link">Login</a>
-                
-                </div> <div class="loginNavbar navbar-nav ms-auto py-0" id="logged">
+                    <a href="{% url 'registro' %}" class="nav-item nav-link">Registro</a>
+                    <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                </div> <div class="loginNavbar navbar-nav ms-auto py-0 d-none" id="logged">
                     <a href="#" class="nav-item nav-link is_authenticated">Bienvenido, Daniel</a>
-                    <a href="cuentas/login/" class="nav-item nav-link ">Logout</a>
+                    <a href="{% url 'login' %}" class="nav-item nav-link" onclick="Logout()">Logout</a>
                 </div>
                 
             </div>

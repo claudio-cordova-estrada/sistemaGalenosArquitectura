@@ -1,3 +1,5 @@
+var logged = localStorage.getItem(logged);
+
 (function ($) {
     "use strict";
 
@@ -32,6 +34,14 @@
     const showClass = "show";
     
     $(window).on("load resize", function() {
+        if (localStorage.getItem(logged) == "logged") {
+            document.getElementById("noLog").classList.add("d-none")
+            document.getElementById("logged").classList.remove("d-none")
+        } else if (localStorage.getItem(logged) == "logout" ) {
+            document.getElementById("noLog").classList.remove("d-none")
+            document.getElementById("logged").classList.add("d-none")
+        }
+
         if (this.matchMedia("(min-width: 992px)").matches) {
             $dropdown.hover(
             function() {
@@ -119,15 +129,18 @@
     
 })(jQuery);
 
-function Login() {
-    document.getElementById("noLog").classList.add("d-none")
-    document.getElementById("logged").classList.remove("d-none")
-}
-
 function Logout() {
     document.getElementById("noLog").classList.remove("d-none")
     document.getElementById("logged").classList.add("d-none")
+    localStorage.setItem(logged, "logout")
+    location.reload()
 }
+
+function Login() {
+    localStorage.setItem(logged, "logged")
+    document.getElementById("noLog").classList.add("d-none")
+    document.getElementById("logged").classList.remove("d-none")
+  }
 
 function loginAppointment() {
     document.getElementById("buttonAppointment").removeAttribute("disabled")

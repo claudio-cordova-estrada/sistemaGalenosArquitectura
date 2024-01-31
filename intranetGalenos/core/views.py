@@ -5,6 +5,8 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password, check_password
+from pythonmonkey import require as js_require
+import time
 
 # Create your views here.
 
@@ -43,7 +45,6 @@ def login(request):
     return render(request, 'core/login.html', data)
 
 
-
 def appointment(request):
     especialidades = Especialidad.objects.all()
     especialidad_filtrada = request.GET.get('especialidad', None)
@@ -52,8 +53,6 @@ def appointment(request):
     else:
         medicos = Medico.objects.all()
     return render(request, 'core/appointment.html', {'especialidades': especialidades, 'medicos': medicos})
-
-
 
 
 def registro(request):
@@ -74,15 +73,18 @@ def registro(request):
         messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
     return render(request, 'core/registro.html')
 
+
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
+        success = False
+
         try:
             paciente = Paciente.objects.get(email=email)
             if check_password(password, paciente.password):
                 messages.success(request, 'Inicio de sesión exitoso.')
+                time.sleep(2)
                 return redirect('appointment')
             else:
                 messages.error(request, 'Contraseña incorrecta.')
