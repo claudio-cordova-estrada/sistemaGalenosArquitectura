@@ -63,4 +63,18 @@ def verificacion(request):
         return loginCon
     
 def login(request):
+    data = {
+        'form': LoginPaciente()
+    }
+
+    user = LoginPaciente(request.POST)
+
+    user = authenticate(request, user)
+    if user is not None:
+        login(request, user)
+        redirect(home)
+    else:
+        redirect('/')
+
     return render(request, 'registration/login.html')
+
