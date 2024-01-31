@@ -79,11 +79,14 @@ var logged = localStorage.getItem(logged);
 
     // Date and time picker
     $('.date').datetimepicker({
-        format: 'L'
+        format: 'L',
+        daysOfWeekDisabled: [0, 6],
     });
     $('.time').datetimepicker({
         format: 'LT'
     });
+
+
 
 
     // Image comparison

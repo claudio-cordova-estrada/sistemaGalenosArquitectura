@@ -1,8 +1,5 @@
 Integrantes:
 
+- Christopher Valenzuela
 - Scarlet Ruiz
 - Claudio Córdova
-
-librerias externas utilizadas:
-
-pythonmonkey

@@ -5,7 +5,6 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password, check_password
-from pythonmonkey import require as js_require
 import time
 
 # Create your views here.
@@ -84,7 +83,6 @@ def login(request):
             paciente = Paciente.objects.get(email=email)
             if check_password(password, paciente.password):
                 messages.success(request, 'Inicio de sesión exitoso.')
-                time.sleep(2)
                 return redirect('appointment')
             else:
                 messages.error(request, 'Contraseña incorrecta.')
