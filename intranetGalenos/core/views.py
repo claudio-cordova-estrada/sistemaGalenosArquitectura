@@ -12,9 +12,6 @@ def home(request):
 def about(request):
     return render(request, 'core/about.html')
 
-def appointment(request):
-    return render(request, 'core/appointment.html')
-
 def contact(request):
     return render(request, 'core/contact.html')
 
@@ -63,6 +60,7 @@ def verificacion(request):
         return loginCon
     
 def login(request):
+<<<<<<< HEAD
     data = {
         'form': LoginPaciente()
     }
@@ -78,3 +76,17 @@ def login(request):
 
     return render(request, 'registration/login.html')
 
+=======
+    return render(request, 'registration/login.html')
+
+
+
+def appointment(request):
+    especialidades = Especialidad.objects.all()
+    especialidad_filtrada = request.GET.get('especialidad', None)
+    if especialidad_filtrada:
+        medicos = Medico.objects.filter(especialidad__nombre_esp=especialidad_filtrada)
+    else:
+        medicos = Medico.objects.all()
+    return render(request, 'core/appointment.html', {'especialidades': especialidades, 'medicos': medicos})
+>>>>>>> 1653afb14b4de4c5ea8bcd038fb75590bb0d9888
