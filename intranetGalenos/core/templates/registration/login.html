@@ -24,10 +24,11 @@
         <br>
 
         <div class="form-container sign-in-container">
-            <form method="GET">
-
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ form.as_ul }}
+                <br>
                 
-                <a href="#">¿Olvidaste tu contraseña?</a>
                 <button type="submit" name="login">Iniciar sesión</button>
             </form>
         </div>

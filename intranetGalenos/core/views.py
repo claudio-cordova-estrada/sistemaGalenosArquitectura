@@ -12,6 +12,9 @@ def home(request):
 def about(request):
     return render(request, 'core/about.html')
 
+def appointment(request):
+    return render(request, 'core/appointment.html')
+
 def contact(request):
     return render(request, 'core/contact.html')
 
@@ -38,46 +41,22 @@ def logReg(request):
         if form.is_valid():
             form.save()
             data['mensaje'] = 'Los datos fueron añadidos correctamente'
-            
-        email = request.GET.get('email', '')
-        password = request.GET.get('password', '')
 
     return render(request, 'registration/logReg.html', data)
 
-def verificacion(request):
+    
+def login(request):   
     data = {}
-    loginCon = False
     
-    email = request.GET.get('email', '')
-    password = request.GET.get('password', '')
-    
-    try:
-        usuario = Usuario.object.get(email=email, password=password)
-        loginCon = True
-        return loginCon
-    except Usuario.DoesNotExist:
-        data['mensaje'] = 'Usuario no encontrado'
-        return loginCon
-    
-def login(request):
-<<<<<<< HEAD
-    data = {
-        'form': LoginPaciente()
-    }
+    userN = request.GET.get('username', None)
+    pssw = request.GET.get('password', None)
 
-    user = LoginPaciente(request.POST)
-
-    user = authenticate(request, user)
+    user = authenticate(username = userN, password = pssw)
     if user is not None:
         login(request, user)
-        redirect(home)
     else:
-        redirect('/')
-
-    return render(request, 'registration/login.html')
-
-=======
-    return render(request, 'registration/login.html')
+        data['mensaje'] = 'Error al iniciar sesión'
+        return render(request, 'registration/login.html', data)
 
 
 
@@ -89,4 +68,3 @@ def appointment(request):
     else:
         medicos = Medico.objects.all()
     return render(request, 'core/appointment.html', {'especialidades': especialidades, 'medicos': medicos})
->>>>>>> 1653afb14b4de4c5ea8bcd038fb75590bb0d9888

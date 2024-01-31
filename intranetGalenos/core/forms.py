@@ -17,7 +17,7 @@ class PacienteForm(ModelForm):
 class LoginPaciente(AuthenticationForm):
     class Meta:
         model = Paciente
-        fields = ['email', 'password']
+        fields = ['userName', 'password']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
