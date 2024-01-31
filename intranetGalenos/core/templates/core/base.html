@@ -86,7 +86,7 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="home.html" class="navbar-brand p-0">
+        <a href="{% url 'home' %}" class="navbar-brand p-0">
             <h1 class="m-0 text-primary"><i class="fa fa-stethoscope me-2"></i>Clínica Galeno</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -109,6 +109,15 @@
                 <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                 <a href="{% url 'registro' %}" class="nav-item nav-link">Registro</a>
                 <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                <div class="loginNavbar navbar-nav ms-auto py-0" id="noLog">
+                    <a href="{% url 'logReg' %}" class="nav-item nav-link">Registro</a>
+                    <a href="cuentas/login/" class="nav-item nav-link">Login</a>
+                
+                </div> <div class="loginNavbar navbar-nav ms-auto py-0" id="logged">
+                    <a href="#" class="nav-item nav-link is_authenticated">Bienvenido, Daniel</a>
+                    <a href="cuentas/login/" class="nav-item nav-link ">Logout</a>
+                </div>
+                
             </div>
             <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button>
