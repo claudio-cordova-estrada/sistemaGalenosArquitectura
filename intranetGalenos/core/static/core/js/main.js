@@ -128,3 +128,7 @@ function Logout() {
     document.getElementById("noLog").classList.remove("d-none")
     document.getElementById("logged").classList.add("d-none")
 }
+
+function loginAppointment() {
+    document.getElementById("buttonAppointment").removeAttribute("disabled")
+}
